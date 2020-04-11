@@ -3,7 +3,7 @@
 
 import secrets
 
-import rw_database
+import me_write_database
 
 
 class Sender:
@@ -20,7 +20,7 @@ class Sender:
         name = str(self.name)
         icons = str(self.icons)
         cell = str(self.cell)
-        rw_database.save_sender(sid, name, icons, cell)
+        me_write_database.save_sender(sid, name, icons, cell)
 
     def find_icon(self, position_list):
         # find the icon with a given position list
@@ -74,10 +74,10 @@ class Icons:
 class PositionList:
     # PositionList is a list with possible positions of the icons, the user must choose a cell with the position
     def __init__(self, list_size, num_positions):
-        self.list = []
         trivial = True
 
         while trivial:
+            self.list = []
             for i in range(list_size):
                 self.list.append(secrets.randbelow(num_positions))
             trivial = self.is_trivial(range(num_positions))
@@ -130,4 +130,4 @@ class Question:
         pos_list_set = []
         for pos_list in self.pos_list_set:
             pos_list_set.append(str(pos_list.list))
-        rw_database.save_question(qid, num_answer_letters, icons_set, pos_list_set)
+        me_write_database.save_question(qid, num_answer_letters, icons_set, pos_list_set)
